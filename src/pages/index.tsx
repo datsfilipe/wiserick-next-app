@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import Image from 'next/image'
 
 import { Main, Aside, Title, Button } from '../styles/home'
 
-import goatImg from '../assets/bodezinho.png'
+import bidHeadRickImg from '../assets/bigheadrick.png'
 
 const Home: NextPage = () => {
   return (
@@ -16,14 +17,18 @@ const Home: NextPage = () => {
       </Head>
       <Main>
         <Aside>
-          <Title className="upper-title" >Wise</Title>
-          <Title className="bottom-title" >Goat</Title>
-          <Button>
-            Pedir conselho
-          </Button>
+          <div className="content">
+            <Title className="upperTitle" >Wise</Title>
+            <Title className="bottomTitle" >Rick</Title>
+            <Link href='/advice'>
+              <Button type="button">
+                Pedir conselho
+              </Button>
+            </Link>
+          </div>
         </Aside>
         <div className="image">
-          <Image src={goatImg} alt="Bode" />
+          <Image src={bidHeadRickImg} alt="Bode" />
         </div>
       </Main>
       <footer>
