@@ -1,9 +1,9 @@
 const theme = {
-  bg: '#fefefe',
+  bg: '#1c1c1c',
   purple: '#72005F',
   contrast: '#BAA193',
-  constrastDarker: '#937c6e',
-  cardBG: '#EAE4E0'
+  constrastDarker: '#302c2a',
+  cardBG: '#937c6e'
 }
 
 export default theme

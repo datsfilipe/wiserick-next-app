@@ -31,9 +31,10 @@ const Title = styled.h1`
 `
 
 const Card = styled.div`
-  background-color: #EAE4E0;
+  background-color: ${props => props.theme.cardBG};
   width: 700px;
   display: flex;
+  font-size: 82.5%;
 
   border-radius: 20px;
 
@@ -44,8 +45,11 @@ const Card = styled.div`
     
     img {
       border-radius: 0 20px 20px 0;
-      border-left: 1px solid rgba()
     }
+  }
+
+  @media(max-height: 450px) {
+    font-size: 65%;
   }
 `
 
@@ -53,7 +57,7 @@ const AdviceText = styled.p`
   flex: 1;
   padding: 50px;
 
-  font-size: 3.2rem;
+  font-size: 6em;
   font-weight: bold;
   color: ${props => props.theme.purple};
 
@@ -64,7 +68,7 @@ const AdviceText = styled.p`
 
     font-size: 3rem;
     font-weight: 400;
-    color: #937c6e;
+    color: ${props => props.theme.constrastDarker};
   }
 `
 

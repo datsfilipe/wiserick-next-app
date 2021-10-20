@@ -1,8 +1,12 @@
 import 'styled-components'
 
-import theme from './Themes/main_theme'
-
-export type Theme = typeof theme;
+export type Theme = {
+  bg: string;
+  purple: string;
+  contrast: string;
+  constrastDarker: string;
+  cardBG: string;
+}
 
 declare module 'styled-components' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

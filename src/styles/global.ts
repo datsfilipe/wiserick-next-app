@@ -9,6 +9,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
     
     font-size: 62.5%;
+    background-color: ${props => props.theme.bg}
   }
   h1, button {
     font-family: 'Roboto', sans-serif;

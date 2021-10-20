@@ -4,10 +4,30 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { Main, Aside, Title, Button } from '../styles/home'
+import { ButtonComponent } from '../components/Button'
+import { useTheme } from '../hooks/useTheme'
 
-import bidHeadRickImg from '../assets/bigheadrick.png'
+import mainThemeIcon from '../assets/icons/sun.svg'
+import main_theme from '../styles/Themes/main_theme'
+
+import darkThemeIcon from '../assets/icons/moon.svg'
+import dark_theme from '../styles/Themes/dark_theme'
+
+import bidHeadRickImg from '../assets/images/bigheadrick.png'
 
 const Home: NextPage = () => {
+  const { theme, themeIcon, switchTheme } = useTheme()
+
+  async function handleToggleTheme() {
+    if (theme === main_theme) {
+      switchTheme(dark_theme, darkThemeIcon)
+    } else if (theme === dark_theme) {
+      switchTheme(main_theme, mainThemeIcon)
+    } else {
+      throw new Error('Unknown theme')
+    }
+  }
+ 
   return (
     <div>
       <Head>
@@ -16,6 +36,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="" />
       </Head>
       <Main>
+        <ButtonComponent toggleThemeButtonImage={themeIcon} propFunction={handleToggleTheme} />
         <Aside>
           <div className="content">
             <Title className="upperTitle" >Wise</Title>
