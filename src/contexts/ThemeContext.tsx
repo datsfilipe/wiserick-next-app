@@ -1,7 +1,9 @@
 import 'styled-components'
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useState, useEffect } from 'react'
 import main_theme from '../styles/Themes/main_theme'
 import mainToggleThemeIcon from '../assets/icons/sun.svg'
+import dark_theme from '../styles/Themes/dark_theme'
+import darkThemeIcon from '../assets/icons/moon.svg'
 import { DefaultTheme } from 'styled-components'
 
 export type ThemeContextType = {
@@ -16,13 +18,28 @@ type ThemeContextProviderProps = {
 
 const ThemeContext = createContext({} as ThemeContextType)
 
-function ThemeContextProvider (props: ThemeContextProviderProps) {
+function ThemeContextProvider(props: ThemeContextProviderProps) {
   const [theme, setTheme] = useState<DefaultTheme>(main_theme)
   const [themeIcon, setThemeIcon] = useState<string>(mainToggleThemeIcon)
 
-  function switchTheme (theme: DefaultTheme, themeIcon: string) {
+  useEffect(() => {
+    const savedThemeName = localStorage.getItem('themeName')
+
+    if (savedThemeName === 'dark') {
+      setTheme(dark_theme)
+      setThemeIcon(darkThemeIcon)
+    } else {
+      setTheme(main_theme)
+      setThemeIcon(mainToggleThemeIcon)
+    }
+  }, [])
+
+  function switchTheme(theme: DefaultTheme, themeIcon: string) {
     setTheme(theme)
     setThemeIcon(themeIcon)
+
+    const themeName = theme === dark_theme ? 'dark' : 'main'
+    localStorage.setItem('themeName', themeName)
   }
 
   return (
