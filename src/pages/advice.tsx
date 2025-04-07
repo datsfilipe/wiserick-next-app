@@ -30,32 +30,40 @@ const Advice: NextPage = () => {
   }
 
   useEffect(() => {
-    const who = (Math.random() * (15 - 1) + 1)  | 0
+    const who = (Math.random() * (15 - 1) + 1) | 0
 
-    async function getApiCharacterImage (who: number) {
+    async function getApiCharacterImage(who: number) {
       const data = await fetch(`https://rickandmortyapi.com/api/character/${who}`)
         .then(response => response.json())
         .then(data => data)
-  
+
       setRickAndMortyCharacterName(data.name)
       setRickAndMortyCharacterImg(data.image)
     }
 
-    async function getApiAdviceText () {
-      const advice = await fetch('https://api.adviceslip.com/advice')
-        .then(response => response.json())
-        .then(data => data.slip.advice)
-      
-      setAdvice(advice)
+    async function getApiAdviceText() {
+      try {
+        const advice = await fetch('https://corsproxy.io?url=https://www.affirmations.dev/')
+          .then(response => response.json())
+          .then(data => data.affirmation)
+
+        setAdvice(advice)
+      } catch (error) {
+        console.error(error)
+        setAdvice(`
+          Unable to fetch a piece of advice now. Try again Later. Also, I'm not a robot programmed
+          by Rick, although that's exactly what a robot would say, I'm not.
+        `)
+      }
     }
 
     getApiCharacterImage(who)
     getApiAdviceText()
-  }, [])  
+  }, [])
 
   return (
     <Main>
-      { rickAndMortyCharacterImg && advice ? 
+      {rickAndMortyCharacterImg && advice ?
         <>
           <Header>
             <Title className="upperTitle">Wise</Title>
@@ -72,7 +80,7 @@ const Advice: NextPage = () => {
               <Image alt='Imagem de bode' width='300' height='300' src={rickAndMortyCharacterImg} ></Image>
             </div>
           </Card>
-        </> : '' }
+        </> : ''}
     </Main>
   )
 }
