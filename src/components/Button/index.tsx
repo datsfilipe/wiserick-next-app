@@ -1,18 +1,16 @@
 import Image from 'next/image'
 
-import { Button } from './style'
-
-function ButtonComponent (props: {toggleThemeButtonImage: string, propFunction: () => void}) {
+function Button(props: { toggleThemeButtonImage: string, propFunction: () => void }) {
   return (
-    <Button onClick={props.propFunction}>
-      { props.toggleThemeButtonImage ?
+    <button className='btn' onClick={props.propFunction}>
+      {props.toggleThemeButtonImage ?
         <div className="button-image">
           <Image src={props.toggleThemeButtonImage} alt="Toggle theme" width="24" height="24" />
         </div>
-        : '' 
+        : ''
       }
-    </Button>
+    </button>
   )
 }
 
-export { ButtonComponent }
+export { Button }

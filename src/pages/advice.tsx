@@ -1,33 +1,12 @@
 import type { NextPage } from 'next'
-import Image from 'next/image'
-
 import { useEffect, useState } from 'react'
-
-import { Main, Header, Title, Card, AdviceText } from '../styles/advice'
-import { ButtonComponent } from '../components/Button'
-import { useTheme } from '../hooks/useTheme'
-import mainThemeIcon from '../assets/icons/sun.svg'
-import main_theme from '../styles/Themes/main_theme'
-
-import darkThemeIcon from '../assets/icons/moon.svg'
-import dark_theme from '../styles/Themes/dark_theme'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const Advice: NextPage = () => {
   const [rickAndMortyCharacterImg, setRickAndMortyCharacterImg] = useState<string>()
   const [rickAndMortyCharacterName, setRickAndMortyCharacterName] = useState<string>()
   const [advice, setAdvice] = useState<string>()
-
-  const { theme, themeIcon, switchTheme } = useTheme()
-
-  async function handleToggleTheme() {
-    if (theme === main_theme) {
-      switchTheme(dark_theme, darkThemeIcon)
-    } else if (theme === dark_theme) {
-      switchTheme(main_theme, mainThemeIcon)
-    } else {
-      throw new Error('Unknown theme')
-    }
-  }
 
   useEffect(() => {
     const who = (Math.random() * (15 - 1) + 1) | 0
@@ -62,26 +41,27 @@ const Advice: NextPage = () => {
   }, [])
 
   return (
-    <Main>
+    <main className='advice'>
       {rickAndMortyCharacterImg && advice ?
         <>
-          <Header>
-            <Title className="upperTitle">Wise</Title>
-            <Title className="bottomTitle">Rick</Title>
-          </Header>
-          <ButtonComponent toggleThemeButtonImage={themeIcon} propFunction={handleToggleTheme} />
-          <Card>
-            <AdviceText>
+          <header>
+            <Link href="/">
+              <h1 className="upperTitle">Wise</h1>
+              <h1 className="bottomTitle">Rick</h1>
+            </Link>
+          </header>
+          <div className="card">
+            <div className="advice-text">
               {`"${advice}"`}
               <br />
               <p className="author">- {rickAndMortyCharacterName}</p>
-            </AdviceText>
+            </div>
             <div className="image" >
               <Image alt='Imagem de bode' width='300' height='300' src={rickAndMortyCharacterImg} ></Image>
             </div>
-          </Card>
+          </div>
         </> : ''}
-    </Main>
+    </main>
   )
 }
 
